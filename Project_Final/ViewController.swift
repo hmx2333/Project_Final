@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  Draw.swift
 //  Project_Final
 //
 //  Created by haha on 16/4/21.
@@ -9,64 +9,95 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ViewController: UIViewController {
     
-    var captureSession : AVCaptureSession?
-    var stillImageOutput : AVCaptureStillImageOutput?
+    
+    let captureSession = AVCaptureSession()
     var previewLayer : AVCaptureVideoPreviewLayer?
     
-    
-    @IBOutlet weak var cameraView: UIView!
+    // If we find a device we'll store it here for later use
+    var captureDevice : AVCaptureDevice?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        captureSession.sessionPreset = AVCaptureSessionPresetHigh
         
-        previewLayer?.frame = cameraView.bounds
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+        let devices = AVCaptureDevice.devices()
         
-        captureSession = AVCaptureSession()
-        captureSession?.sessionPreset = AVCaptureSessionPreset1920x1080
-        
-        
-        var backCamera = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        
-        var error : NSError?
-        var input = try! AVCaptureDeviceInput(device: backCamera)
-        
-        
-        if (error == nil && captureSession?.canAddInput(input) != nil){
-            
-            captureSession?.addInput(input)
-            
-            stillImageOutput = AVCaptureStillImageOutput()
-            stillImageOutput?.outputSettings = [AVVideoCodecKey : AVVideoCodecJPEG]
-            
-            if (captureSession?.canAddOutput(stillImageOutput) != nil){
-                captureSession?.addOutput(stillImageOutput)
-                
-                previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                previewLayer?.videoGravity = AVLayerVideoGravityResizeAspect
-                previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.Portrait
-                cameraView.layer.addSublayer(previewLayer!)
-                captureSession?.startRunning()
+        // Loop through all the capture devices on this phone
+        for device in devices {
+            // Make sure this particular device supports video
+            if (device.hasMediaType(AVMediaTypeVideo)) {
+                // Finally check the position and confirm we've got the back camera
+                if(device.position == AVCaptureDevicePosition.Back) {
+                    captureDevice = device as? AVCaptureDevice
+                    if captureDevice != nil {
+                        print("Capture device found")
+                        beginSession()
+                    }
+                }
             }
         }
         
     }
     
+    func focusTo(value : Float) {
+        if let device = captureDevice {
+            do {
+                try device.lockForConfiguration()
+                device.setFocusModeLockedWithLensPosition(value, completionHandler: { (time) -> Void in
+                    //
+                })
+                device.unlockForConfiguration()
+            } catch let error as NSError {
+                print(error.code)
+            }        }
+    }
+    let screenWidth = UIScreen.mainScreen().bounds.size.width
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        var anyTouch = touches.first
+        var touchPercent = anyTouch!.locationInView(self.view).x / screenWidth
+        focusTo(Float(touchPercent))
+    }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        var anyTouch = touches.first
+        var touchPercent = anyTouch!.locationInView(self.view).x / screenWidth
+
+        focusTo(Float(touchPercent))
+    }
+    
+    func configureDevice() {
+        if let device = captureDevice {
+            do {
+                try device.lockForConfiguration()
+                device.focusMode = .Locked
+                device.unlockForConfiguration()
+            }
+            catch{
+                print("configure error")
+            }
+        }
+        
+    }
+    
+    func beginSession() {
+        
+        configureDevice()
+        
+//        var err : NSError? = nil
+//        captureSession.addInput(AVCaptureDeviceInput(device: captureDevice, error: &err))
+        let input = try! AVCaptureDeviceInput(device: captureDevice)
+        captureSession.addInput(input)
+        
+
+        
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        self.view.layer.addSublayer(previewLayer!)
+        previewLayer?.frame = self.view.layer.frame
+        captureSession.startRunning()
+    }
     
 }
-

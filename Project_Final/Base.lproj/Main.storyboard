@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--First Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Project_Final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="FirstScreenViewController" customModule="Project_Final" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="Draw" customModule="Project_Final" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="Draw" customModule="Project_Final">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -25,7 +25,7 @@
                                     <color key="titleColor" red="0.16454670832690899" green="0.74502036115467152" blue="0.18019474011527242" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="nVH-Cs-fEv" kind="show" id="vSH-DP-Pua"/>
+                                    <segue destination="nVH-Cs-fEv" kind="show" id="iMz-lf-ZLg"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bC1-Sw-6Te">
@@ -33,7 +33,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <state key="normal" title="Instructions"/>
                                 <connections>
-                                    <segue destination="GaT-bA-GjN" kind="show" id="LLx-h4-xR6"/>
+                                    <segue destination="GaT-bA-GjN" kind="show" id="kJC-4D-bnG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -53,7 +53,7 @@
         <!--View Controller-->
         <scene sceneID="8DK-wp-7lE">
             <objects>
-                <viewController id="nVH-Cs-fEv" customClass="ViewController" customModule="Project_Final" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nVH-Cs-fEv" customClass="ViewController" customModule="Project_Final" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DbC-td-Czh"/>
                         <viewControllerLayoutGuide type="bottom" id="c9n-Dq-zFe"/>
@@ -77,18 +77,15 @@
                             <constraint firstItem="jBO-i1-se7" firstAttribute="top" secondItem="DbC-td-Czh" secondAttribute="bottom" constant="-20" id="hRW-Da-wQq"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="cameraView" destination="jBO-i1-se7" id="NhD-Aq-uCO"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LcI-bS-DEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="950" y="206"/>
+            <point key="canvasLocation" x="1014" y="-288"/>
         </scene>
-        <!--View Controller-->
+        <!--Second Screen View Controller-->
         <scene sceneID="8qs-f2-tMd">
             <objects>
-                <viewController id="GaT-bA-GjN" sceneMemberID="viewController">
+                <viewController id="GaT-bA-GjN" customClass="SecondScreenViewController" customModule="Project_Final" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ux5-g7-bHY"/>
                         <viewControllerLayoutGuide type="bottom" id="DzN-H5-mCv"/>
@@ -97,18 +94,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-iu-cb9">
-                                <rect key="frame" x="490" y="20" width="90" height="30"/>
-                                <state key="normal" title="Try navigator"/>
-                                <connections>
-                                    <segue destination="nVH-Cs-fEv" kind="show" id="kyH-WX-dJr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="69t-rb-cL6">
                                 <rect key="frame" x="20" y="20" width="76" height="30"/>
                                 <state key="normal" title="main menu"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="yPW-si-p87"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="rwI-qR-5XR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fNF-iu-cb9">
+                                <rect key="frame" x="490" y="20" width="90" height="30"/>
+                                <state key="normal" title="Try navigator"/>
+                                <connections>
+                                    <segue destination="nVH-Cs-fEv" kind="show" id="e5m-0J-iIE"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -123,10 +120,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qqh-dL-Zc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="220" y="993"/>
+            <point key="canvasLocation" x="272" y="305"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="vSH-DP-Pua"/>
+        <segue reference="e5m-0J-iIE"/>
     </inferredMetricsTieBreakers>
 </document>
